@@ -5,7 +5,7 @@ require_relative('./films')
 class Ticket
 
 #InitialiSe
-attr_reader :idea
+attr_reader :id
 attr_accessor :customer_id, :film_id
 
   def initialize(info)
@@ -33,7 +33,7 @@ attr_accessor :customer_id, :film_id
       (customer_id, film_id) VALUES ($1, $2)
       RETURNING id"
       values = [@customer_id, @film_id]
-      ticket = SqlRunner.run(sql, values)[0]
+      ticket = SqlRunner.run(sql, values).first()
       @id = ticket['id'].to_i()
     end
 
