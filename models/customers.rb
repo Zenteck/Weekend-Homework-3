@@ -27,7 +27,7 @@ class Customer
 
 #Instance level CRUD
   def save()
-    sql = "INSERT INTO cutsomers
+    sql = "INSERT INTO customers
     (name, funds) VALUES ($1, $2)
     RETURNING id"
     values = [@name, @funds]
@@ -37,9 +37,9 @@ class Customer
 
   def update()
     sql = "UPDATE customers SET
-    (title, funds) = ($1, $2)
+    (name, funds) = ($1, $2)
     WHERE id = $3"
-    values = [@title, @funds, @id]
+    values = [@name, @funds, @id]
     result = SqlRunner.run(sql, values)
     return result
   end
