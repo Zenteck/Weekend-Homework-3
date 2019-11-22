@@ -51,6 +51,7 @@ class Film
     return result
   end
 
+#Others
   def customers()
     sql = "SELECT customers.* FROM customers
     INNER JOIN tickets ON
@@ -61,5 +62,7 @@ class Film
     result = customers.map{|customer| Customer.new(customer)}
     return result
   end
+
+
 
 end

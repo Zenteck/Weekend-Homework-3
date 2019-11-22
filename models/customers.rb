@@ -1,4 +1,5 @@
-require_relative("../db/sql_runner")
+require_relative('../db/sql_runner')
+require_relative('./tickets')
 
 class Customer
 
@@ -28,7 +29,8 @@ class Customer
 #Instance level CRUD
   def save()
     sql = "INSERT INTO customers
-    (name, funds) VALUES ($1, $2)
+    (name, funds)
+    VALUES ($1, $2)
     RETURNING id"
     values = [@name, @funds]
     customer = SqlRunner.run(sql, values)[0]
@@ -51,6 +53,7 @@ class Customer
     return result
   end
 
+#Others
   def films()
     sql = "SELECT films.* FROM films
     INNER JOIN tickets ON
@@ -61,6 +64,18 @@ class Customer
     result = films.map{|film| Film.new(film)}
     return result
   end
+
+  def buy_ticket(film)
+    sql = "SELECT * FROM films WHERE id = $1"
+    values = [film]
+    viewing = SqlRunner.run(sql, values)
+    result = viewing.map{|movie| Film.new(movie)}
+    film_price = 0
+    film_price = result[0].price
+    @funds -= film_price
+    Ticket.sell_ticket(@id, film)
+  end
+  #This works but doesn't accout for the film ID being invalid
 
 
 end

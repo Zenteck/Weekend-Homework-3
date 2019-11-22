@@ -1,8 +1,9 @@
 require('pry')
 
+require_relative('./models/tickets')
 require_relative('./models/customers')
 require_relative('./models/films')
-require_relative('./models/tickets')
+
 
 Ticket.delete_all()
 Film.delete_all()
@@ -41,7 +42,7 @@ film1 = Film.new({
 film1.save()
 
 film2 = Film.new({
-  'title' => 'Interstellar',
+  'title' => 'Hidden Figures',
   'price' => 15
 })
 film2.save()
