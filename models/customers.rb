@@ -65,6 +65,19 @@ class Customer
     return result
   end
 
+  #below is a cut paste of the above
+  #I don't understand why these are seperate questions
+  def count_tickets()
+    sql = "SELECT films.* FROM films
+    INNER JOIN tickets ON
+    tickets.film_id = films.id
+    WHERE customer_id = $1"
+    values = [@id]
+    films = SqlRunner.run(sql, values)
+    result = films.map{|film| Film.new(film)}
+    return result.count
+  end
+
   def buy_ticket(film)
     sql = "SELECT * FROM films WHERE id = $1"
     values = [film]

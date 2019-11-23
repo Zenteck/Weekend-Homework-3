@@ -67,4 +67,23 @@ attr_accessor :customer_id, :film_id
     return "New ticket id #{id}"
   end
 
+
+#These next two are also coded in the customer & films models.
+#I wasn't sure from the brief which was intented.
+  def self.tickets_for_film(film_id)
+    sql = "SELECT * FROM tickets
+    WHERE film_id = $1"
+    values = [film_id]
+    result = SqlRunner.run(sql, values)
+    return result.count
+  end
+
+  def self.customer_tickets(customer_id)
+    sql = "SELECT * FROM tickets
+    WHERE customer_id = $1"
+    values = [customer_id]
+    result = SqlRunner.run(sql, values)
+    return result.count
+  end
+
 end
