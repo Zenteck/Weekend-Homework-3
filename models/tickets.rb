@@ -1,17 +1,19 @@
 require_relative("../db/sql_runner")
 require_relative('./customers')
 require_relative('./films')
+# require_relative('./screenings')
 
 class Ticket
 
 #InitialiSe
 attr_reader :id
-attr_accessor :customer_id, :film_id
+attr_accessor :customer_id, :film_id, :screening
 
   def initialize(info)
     @id = info['id'].to_i() if info['id']
     @customer_id = info['customer_id'].to_i()
     @film_id = info['film_id'].to_i()
+    # @screening = info['screening_id'].to_i()
   end
 
 #Class level basics
