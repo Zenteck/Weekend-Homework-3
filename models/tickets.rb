@@ -1,7 +1,7 @@
 require_relative("../db/sql_runner")
 require_relative('./customers')
 require_relative('./films')
-# require_relative('./screenings')
+require_relative('./screenings')
 
 class Ticket
 
@@ -13,7 +13,7 @@ attr_accessor :customer_id, :film_id, :screening
     @id = info['id'].to_i() if info['id']
     @customer_id = info['customer_id'].to_i()
     @film_id = info['film_id'].to_i()
-    # @screening = info['screening_id'].to_i()
+    @screening_id = info['screening_id'].to_i()
   end
 
 #Class level basics
@@ -56,8 +56,6 @@ attr_accessor :customer_id, :film_id, :screening
   end
 
 #Other
-
-#I can't figure out how to create a Ruby Object from this
   def self.sell_ticket(customer, film)
     sql = "INSERT INTO tickets
     (customer_id, film_id)

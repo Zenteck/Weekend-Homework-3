@@ -31,7 +31,7 @@ max tickets (limit sold)
 most tickets sold per time per film
 enforce max tickets
 
-
+customer3.buy_ticket(3)
 
 shitlist:
 

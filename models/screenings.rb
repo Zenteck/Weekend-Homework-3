@@ -3,6 +3,9 @@ require_relative('./films')
 
 class Screening
 
+  attr_reader :id
+  attr_accessor :film_id, :film_time
+
   def initialize(info)
     @id = info['id'].to_i() if info['id']
     @film_id = info['film_id'].to_i()
@@ -48,5 +51,21 @@ class Screening
       return result
     end
 
+
+#Class Level
+    def self.popular(film)
+      sql = "SELECT * FROM tickets
+      WHERE film_id = $1"
+      values = [film]
+      result = SqlRunner.run(sql, values)
+      tickets_array = result.map{|ticket| Ticket.new(ticket)}
+      #Stack overflow to the rescue
+
+    end
+      #I have the array of hashes
+
+      #I need to splt it up by screenings
+
+      #cout each and return the one wth most tickets
 
 end
